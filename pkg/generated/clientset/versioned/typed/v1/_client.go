@@ -21,7 +21,7 @@ package v1
 import (
 	http "net/http"
 
-	scheme "github.com/harvester/harvester/pkg/generated/clientset/versioned/scheme"
+	scheme "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/scheme"
 	corev1 "k8s.io/api/core/v1"
 	rest "k8s.io/client-go/rest"
 )

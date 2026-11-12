@@ -21,8 +21,8 @@ package v1
 import (
 	context "context"
 
-	applyconfigurationcorev1 "github.com/harvester/harvester/pkg/generated/applyconfiguration/core/v1"
-	scheme "github.com/harvester/harvester/pkg/generated/clientset/versioned/scheme"
+	applyconfigurationcorev1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/applyconfiguration/core/v1"
+	scheme "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/scheme"
 	authenticationv1 "k8s.io/api/authentication/v1"
 	corev1 "k8s.io/api/core/v1"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"

@@ -22,11 +22,8 @@ import (
 	fmt "fmt"
 	http "net/http"
 
-	cdiv1beta1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/cdi.kubevirt.io/v1beta1"
-	kubeovnv1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/kubeovn.io/v1"
-	kubevirtv1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/kubevirt.io/v1"
-	uploadv1beta1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/upload.cdi.kubevirt.io/v1beta1"
-	corev1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/v1"
+	kubevirtv1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/kubevirt.io/v1"
+	corev1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/v1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -35,20 +32,14 @@ import (
 type Interface interface {
 	Discovery() discovery.DiscoveryInterfaces
 	CoreV1() corev1.CoreV1Interface
-	CdiV1beta1() cdiv1beta1.CdiV1beta1Interface
-	KubeovnV1() kubeovnv1.KubeovnV1Interface
 	KubevirtV1() kubevirtv1.KubevirtV1Interface
-	UploadV1beta1() uploadv1beta1.UploadV1beta1Interface
 }
 
 // Clientset contains the clients for groups.
 type Clientset struct {
 	*discovery.DiscoveryClient
-	coreV1        *corev1.CoreV1Client
-	cdiV1beta1    *cdiv1beta1.CdiV1beta1Client
-	kubeovnV1     *kubeovnv1.KubeovnV1Client
-	kubevirtV1    *kubevirtv1.KubevirtV1Client
-	uploadV1beta1 *uploadv1beta1.UploadV1beta1Client
+	coreV1     *corev1.CoreV1Client
+	kubevirtV1 *kubevirtv1.KubevirtV1Client
 }
 
 // CoreV1 retrieves the CoreV1Client
@@ -56,24 +47,9 @@ func (c *Clientset) CoreV1() corev1.CoreV1Interface {
 	return c.coreV1
 }
 
-// CdiV1beta1 retrieves the CdiV1beta1Client
-func (c *Clientset) CdiV1beta1() cdiv1beta1.CdiV1beta1Interface {
-	return c.cdiV1beta1
-}
-
-// KubeovnV1 retrieves the KubeovnV1Client
-func (c *Clientset) KubeovnV1() kubeovnv1.KubeovnV1Interface {
-	return c.kubeovnV1
-}
-
 // KubevirtV1 retrieves the KubevirtV1Client
 func (c *Clientset) KubevirtV1() kubevirtv1.KubevirtV1Interface {
 	return c.kubevirtV1
-}
-
-// UploadV1beta1 retrieves the UploadV1beta1Client
-func (c *Clientset) UploadV1beta1() uploadv1beta1.UploadV1beta1Interface {
-	return c.uploadV1beta1
 }
 
 // Discovery retrieves the DiscoveryClient
@@ -124,19 +100,7 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 	if err != nil {
 		return nil, err
 	}
-	cs.cdiV1beta1, err = cdiv1beta1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
-	cs.kubeovnV1, err = kubeovnv1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
 	cs.kubevirtV1, err = kubevirtv1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
-	cs.uploadV1beta1, err = uploadv1beta1.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
 	}
@@ -162,10 +126,7 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
 	cs.coreV1 = corev1.New(c)
-	cs.cdiV1beta1 = cdiv1beta1.New(c)
-	cs.kubeovnV1 = kubeovnv1.New(c)
 	cs.kubevirtV1 = kubevirtv1.New(c)
-	cs.uploadV1beta1 = uploadv1beta1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)
 	return &cs

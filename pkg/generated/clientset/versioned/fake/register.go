@@ -19,7 +19,6 @@ limitations under the License.
 package fake
 
 import (
-	kubeovnv1 "github.com/kubeovn/kube-ovn/pkg/apis/kubeovn/v1"
 	corev1 "k8s.io/api/core/v1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
@@ -27,8 +26,6 @@ import (
 	serializer "k8s.io/apimachinery/pkg/runtime/serializer"
 	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
 	kubevirtv1 "kubevirt.io/api/core/v1"
-	cdiv1beta1 "kubevirt.io/containerized-data-importer-api/pkg/apis/core/v1beta1"
-	uploadv1beta1 "kubevirt.io/containerized-data-importer-api/pkg/apis/upload/v1beta1"
 )
 
 var scheme = runtime.NewScheme()
@@ -36,10 +33,7 @@ var codecs = serializer.NewCodecFactory(scheme)
 
 var localSchemeBuilder = runtime.SchemeBuilder{
 	corev1.AddToScheme,
-	cdiv1beta1.AddToScheme,
-	kubeovnv1.AddToScheme,
 	kubevirtv1.AddToScheme,
-	uploadv1beta1.AddToScheme,
 }
 
 // AddToScheme adds all types of this clientset into the given scheme. This allows composition

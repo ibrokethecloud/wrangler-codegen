@@ -19,7 +19,7 @@ limitations under the License.
 package fake
 
 import (
-	v1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/v1"
+	v1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/v1"
 	rest "k8s.io/client-go/rest"
 	testing "k8s.io/client-go/testing"
 )

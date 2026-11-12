@@ -19,18 +19,12 @@ limitations under the License.
 package fake
 
 import (
-	applyconfiguration "github.com/harvester/harvester/pkg/generated/applyconfiguration"
-	clientset "github.com/harvester/harvester/pkg/generated/clientset/versioned"
-	cdiv1beta1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/cdi.kubevirt.io/v1beta1"
-	fakecdiv1beta1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/cdi.kubevirt.io/v1beta1/fake"
-	kubeovnv1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/kubeovn.io/v1"
-	fakekubeovnv1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/kubeovn.io/v1/fake"
-	kubevirtv1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/kubevirt.io/v1"
-	fakekubevirtv1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/kubevirt.io/v1/fake"
-	uploadv1beta1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/upload.cdi.kubevirt.io/v1beta1"
-	fakeuploadv1beta1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/upload.cdi.kubevirt.io/v1beta1/fake"
-	corev1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/v1"
-	fakecorev1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/v1/fake"
+	applyconfiguration "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/applyconfiguration"
+	clientset "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned"
+	kubevirtv1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/kubevirt.io/v1"
+	fakekubevirtv1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/kubevirt.io/v1/fake"
+	corev1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/v1"
+	fakecorev1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/v1/fake"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
@@ -149,22 +143,7 @@ func (c *Clientset) CoreV1() corev1.CoreV1Interface {
 	return &fakecorev1.FakeCoreV1{Fake: &c.Fake}
 }
 
-// CdiV1beta1 retrieves the CdiV1beta1Client
-func (c *Clientset) CdiV1beta1() cdiv1beta1.CdiV1beta1Interface {
-	return &fakecdiv1beta1.FakeCdiV1beta1{Fake: &c.Fake}
-}
-
-// KubeovnV1 retrieves the KubeovnV1Client
-func (c *Clientset) KubeovnV1() kubeovnv1.KubeovnV1Interface {
-	return &fakekubeovnv1.FakeKubeovnV1{Fake: &c.Fake}
-}
-
 // KubevirtV1 retrieves the KubevirtV1Client
 func (c *Clientset) KubevirtV1() kubevirtv1.KubevirtV1Interface {
 	return &fakekubevirtv1.FakeKubevirtV1{Fake: &c.Fake}
-}
-
-// UploadV1beta1 retrieves the UploadV1beta1Client
-func (c *Clientset) UploadV1beta1() uploadv1beta1.UploadV1beta1Interface {
-	return &fakeuploadv1beta1.FakeUploadV1beta1{Fake: &c.Fake}
 }

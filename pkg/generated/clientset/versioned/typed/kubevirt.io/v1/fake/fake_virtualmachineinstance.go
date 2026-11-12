@@ -19,8 +19,8 @@ limitations under the License.
 package fake
 
 import (
-	corev1 "github.com/harvester/harvester/pkg/generated/applyconfiguration/core/v1"
-	kubevirtiov1 "github.com/harvester/harvester/pkg/generated/clientset/versioned/typed/kubevirt.io/v1"
+	corev1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/applyconfiguration/core/v1"
+	kubevirtiov1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/kubevirt.io/v1"
 	gentype "k8s.io/client-go/gentype"
 	v1 "kubevirt.io/api/core/v1"
 )

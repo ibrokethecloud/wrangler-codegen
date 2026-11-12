@@ -19,11 +19,11 @@ limitations under the License.
 package v1
 
 import (
-	v1beta1 "github.com/harvester/harvester/pkg/generated/applyconfiguration/core/v1beta1"
 	apismetav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	types "k8s.io/apimachinery/pkg/types"
 	metav1 "k8s.io/client-go/applyconfigurations/meta/v1"
 	corev1 "kubevirt.io/api/core/v1"
+	v1beta1 "kubevirt.io/containerized-data-importer-api/pkg/apis/core/v1beta1"
 )
 
 // DataVolumeTemplateSpecApplyConfiguration represents a declarative configuration of the DataVolumeTemplateSpec type for use
@@ -34,7 +34,7 @@ type DataVolumeTemplateSpecApplyConfiguration struct {
 	metav1.TypeMetaApplyConfiguration    `json:""`
 	*metav1.ObjectMetaApplyConfiguration `json:"metadata,omitempty"`
 	// DataVolumeSpec contains the DataVolume specification.
-	Spec *v1beta1.DataVolumeSpecApplyConfiguration `json:"spec,omitempty"`
+	Spec *v1beta1.DataVolumeSpec `json:"spec,omitempty"`
 	// DataVolumeTemplateDummyStatus is here simply for backwards compatibility with
 	// a previous API.
 	Status *corev1.DataVolumeTemplateDummyStatus `json:"status,omitempty"`
@@ -212,8 +212,8 @@ func (b *DataVolumeTemplateSpecApplyConfiguration) ensureObjectMetaApplyConfigur
 // WithSpec sets the Spec field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the Spec field is set to the value of the last call.
-func (b *DataVolumeTemplateSpecApplyConfiguration) WithSpec(value *v1beta1.DataVolumeSpecApplyConfiguration) *DataVolumeTemplateSpecApplyConfiguration {
-	b.Spec = value
+func (b *DataVolumeTemplateSpecApplyConfiguration) WithSpec(value v1beta1.DataVolumeSpec) *DataVolumeTemplateSpecApplyConfiguration {
+	b.Spec = &value
 	return b
 }
 
