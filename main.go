@@ -22,8 +22,9 @@ func main() {
 					kubevirtv1.VirtualMachineInstanceMigration{},
 					kubevirtv1.KubeVirt{},
 				},
-				GenerateTypes:   false,
-				GenerateClients: true,
+				GenerateTypes:     false,
+				GenerateClients:   true,
+				GenerateInformers: true,
 			},
 			corev1.GroupName: {
 				Types: []interface{}{
@@ -32,8 +33,9 @@ func main() {
 					corev1.PersistentVolumeClaim{},
 					corev1.ResourceQuota{},
 				},
-				GenerateTypes:   false,
-				GenerateClients: true,
+				GenerateTypes:     false,
+				GenerateClients:   true,
+				GenerateInformers: true,
 			},
 		},
 	})
