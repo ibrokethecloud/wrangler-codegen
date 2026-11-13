@@ -23,8 +23,6 @@ import (
 	clientset "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned"
 	kubevirtv1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/kubevirt.io/v1"
 	fakekubevirtv1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/kubevirt.io/v1/fake"
-	corev1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/v1"
-	fakecorev1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/v1/fake"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
@@ -137,11 +135,6 @@ var (
 	_ clientset.Interface = &Clientset{}
 	_ testing.FakeClient  = &Clientset{}
 )
-
-// CoreV1 retrieves the CoreV1Client
-func (c *Clientset) CoreV1() corev1.CoreV1Interface {
-	return &fakecorev1.FakeCoreV1{Fake: &c.Fake}
-}
 
 // KubevirtV1 retrieves the KubevirtV1Client
 func (c *Clientset) KubevirtV1() kubevirtv1.KubevirtV1Interface {

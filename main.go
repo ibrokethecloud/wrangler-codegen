@@ -5,7 +5,6 @@ import (
 
 	controllergen "github.com/rancher/wrangler/v3/pkg/controller-gen"
 	"github.com/rancher/wrangler/v3/pkg/controller-gen/args"
-	corev1 "k8s.io/api/core/v1"
 	kubevirtv1 "kubevirt.io/api/core/v1"
 )
 
@@ -14,28 +13,17 @@ func main() {
 	controllergen.Run(args.Options{
 		OutputPackage: "github.com/ibrokethecloud/wrangler-codegen/pkg/generated",
 		Boilerplate:   "scripts/boilerplate.go.txt",
+		/*ExternalApplyConfigurations: map[types.Name]string{
+			{Package: "k8s.io/apimachinery/pkg/apis/meta/v1", Name: "Condition"}:       "k8s.io/client-go/applyconfigurations/meta/v1",
+			{Package: "k8s.io/api/core/v1", Name: "PersistentVolumeClaimVolumeSource"}: "k8s.io/client-go/applyconfigurations/core/v1",
+			{Package: "k8s.io/api/core/v1", Name: "LocalObjectReference"}:              "k8s.io/client-go/applyconfigurations/core/v1",
+		},*/
 		Groups: map[string]args.Group{
 			kubevirtv1.SchemeGroupVersion.Group: {
 				Types: []interface{}{
-					kubevirtv1.VirtualMachine{},
-					kubevirtv1.VirtualMachineInstance{},
-					kubevirtv1.VirtualMachineInstanceMigration{},
-					kubevirtv1.KubeVirt{},
+					kubevirtv1.UtilityVolume{},
 				},
-				GenerateTypes:     false,
-				GenerateClients:   true,
-				GenerateInformers: true,
-			},
-			corev1.GroupName: {
-				Types: []interface{}{
-					corev1.Node{},
-					corev1.PersistentVolume{},
-					corev1.PersistentVolumeClaim{},
-					corev1.ResourceQuota{},
-				},
-				GenerateTypes:     false,
-				GenerateClients:   true,
-				GenerateInformers: true,
+				GenerateClients: true,
 			},
 		},
 	})

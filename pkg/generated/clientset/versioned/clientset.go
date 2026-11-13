@@ -23,7 +23,6 @@ import (
 	http "net/http"
 
 	kubevirtv1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/kubevirt.io/v1"
-	corev1 "github.com/ibrokethecloud/wrangler-codegen/pkg/generated/clientset/versioned/typed/v1"
 	discovery "k8s.io/client-go/discovery"
 	rest "k8s.io/client-go/rest"
 	flowcontrol "k8s.io/client-go/util/flowcontrol"
@@ -31,20 +30,13 @@ import (
 
 type Interface interface {
 	Discovery() discovery.DiscoveryInterfaces
-	CoreV1() corev1.CoreV1Interface
 	KubevirtV1() kubevirtv1.KubevirtV1Interface
 }
 
 // Clientset contains the clients for groups.
 type Clientset struct {
 	*discovery.DiscoveryClient
-	coreV1     *corev1.CoreV1Client
 	kubevirtV1 *kubevirtv1.KubevirtV1Client
-}
-
-// CoreV1 retrieves the CoreV1Client
-func (c *Clientset) CoreV1() corev1.CoreV1Interface {
-	return c.coreV1
 }
 
 // KubevirtV1 retrieves the KubevirtV1Client
@@ -96,10 +88,6 @@ func NewForConfigAndClient(c *rest.Config, httpClient *http.Client) (*Clientset,
 
 	var cs Clientset
 	var err error
-	cs.coreV1, err = corev1.NewForConfigAndClient(&configShallowCopy, httpClient)
-	if err != nil {
-		return nil, err
-	}
 	cs.kubevirtV1, err = kubevirtv1.NewForConfigAndClient(&configShallowCopy, httpClient)
 	if err != nil {
 		return nil, err
@@ -125,7 +113,6 @@ func NewForConfigOrDie(c *rest.Config) *Clientset {
 // New creates a new Clientset for the given RESTClient.
 func New(c rest.Interface) *Clientset {
 	var cs Clientset
-	cs.coreV1 = corev1.New(c)
 	cs.kubevirtV1 = kubevirtv1.New(c)
 
 	cs.DiscoveryClient = discovery.NewDiscoveryClient(c)

@@ -31,10 +31,7 @@ func init() {
 }
 
 type Interface interface {
-	KubeVirt() KubeVirtController
-	VirtualMachine() VirtualMachineController
-	VirtualMachineInstance() VirtualMachineInstanceController
-	VirtualMachineInstanceMigration() VirtualMachineInstanceMigrationController
+	UtilityVolume() UtilityVolumeController
 }
 
 func New(controllerFactory controller.SharedControllerFactory) Interface {
@@ -47,18 +44,6 @@ type version struct {
 	controllerFactory controller.SharedControllerFactory
 }
 
-func (v *version) KubeVirt() KubeVirtController {
-	return generic.NewController[*v1.KubeVirt, *v1.KubeVirtList](schema.GroupVersionKind{Group: "kubevirt.io", Version: "v1", Kind: "KubeVirt"}, "kubevirts", true, v.controllerFactory)
-}
-
-func (v *version) VirtualMachine() VirtualMachineController {
-	return generic.NewController[*v1.VirtualMachine, *v1.VirtualMachineList](schema.GroupVersionKind{Group: "kubevirt.io", Version: "v1", Kind: "VirtualMachine"}, "virtualmachines", true, v.controllerFactory)
-}
-
-func (v *version) VirtualMachineInstance() VirtualMachineInstanceController {
-	return generic.NewController[*v1.VirtualMachineInstance, *v1.VirtualMachineInstanceList](schema.GroupVersionKind{Group: "kubevirt.io", Version: "v1", Kind: "VirtualMachineInstance"}, "virtualmachineinstances", true, v.controllerFactory)
-}
-
-func (v *version) VirtualMachineInstanceMigration() VirtualMachineInstanceMigrationController {
-	return generic.NewController[*v1.VirtualMachineInstanceMigration, *v1.VirtualMachineInstanceMigrationList](schema.GroupVersionKind{Group: "kubevirt.io", Version: "v1", Kind: "VirtualMachineInstanceMigration"}, "virtualmachineinstancemigrations", true, v.controllerFactory)
+func (v *version) UtilityVolume() UtilityVolumeController {
+	return generic.NewController[*v1.UtilityVolume, *v1.UtilityVolumeList](schema.GroupVersionKind{Group: "kubevirt.io", Version: "v1", Kind: "UtilityVolume"}, "utilityvolumes", true, v.controllerFactory)
 }
