@@ -19,7 +19,7 @@ limitations under the License.
 package v1
 
 import (
-	corev1 "k8s.io/api/core/v1"
+	corev1 "k8s.io/client-go/applyconfigurations/core/v1"
 )
 
 // SysprepSourceApplyConfiguration represents a declarative configuration of the SysprepSource type for use
@@ -28,9 +28,9 @@ import (
 // Represents a Sysprep volume source.
 type SysprepSourceApplyConfiguration struct {
 	// Secret references a k8s Secret that contains Sysprep answer file named autounattend.xml that should be attached as disk of CDROM type.
-	Secret *corev1.LocalObjectReference `json:"secret,omitempty"`
+	Secret *corev1.LocalObjectReferenceApplyConfiguration `json:"secret,omitempty"`
 	// ConfigMap references a ConfigMap that contains Sysprep answer file named autounattend.xml that should be attached as disk of CDROM type.
-	ConfigMap *corev1.LocalObjectReference `json:"configMap,omitempty"`
+	ConfigMap *corev1.LocalObjectReferenceApplyConfiguration `json:"configMap,omitempty"`
 }
 
 // SysprepSourceApplyConfiguration constructs a declarative configuration of the SysprepSource type for use with
@@ -42,15 +42,15 @@ func SysprepSource() *SysprepSourceApplyConfiguration {
 // WithSecret sets the Secret field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the Secret field is set to the value of the last call.
-func (b *SysprepSourceApplyConfiguration) WithSecret(value corev1.LocalObjectReference) *SysprepSourceApplyConfiguration {
-	b.Secret = &value
+func (b *SysprepSourceApplyConfiguration) WithSecret(value *corev1.LocalObjectReferenceApplyConfiguration) *SysprepSourceApplyConfiguration {
+	b.Secret = value
 	return b
 }
 
 // WithConfigMap sets the ConfigMap field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the ConfigMap field is set to the value of the last call.
-func (b *SysprepSourceApplyConfiguration) WithConfigMap(value corev1.LocalObjectReference) *SysprepSourceApplyConfiguration {
-	b.ConfigMap = &value
+func (b *SysprepSourceApplyConfiguration) WithConfigMap(value *corev1.LocalObjectReferenceApplyConfiguration) *SysprepSourceApplyConfiguration {
+	b.ConfigMap = value
 	return b
 }

@@ -19,7 +19,7 @@ limitations under the License.
 package v1
 
 import (
-	corev1 "k8s.io/api/core/v1"
+	corev1 "k8s.io/client-go/applyconfigurations/core/v1"
 )
 
 // EphemeralVolumeSourceApplyConfiguration represents a declarative configuration of the EphemeralVolumeSource type for use
@@ -28,7 +28,7 @@ type EphemeralVolumeSourceApplyConfiguration struct {
 	// PersistentVolumeClaimVolumeSource represents a reference to a PersistentVolumeClaim in the same namespace.
 	// Directly attached to the vmi via qemu.
 	// More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
-	PersistentVolumeClaim *corev1.PersistentVolumeClaimVolumeSource `json:"persistentVolumeClaim,omitempty"`
+	PersistentVolumeClaim *corev1.PersistentVolumeClaimVolumeSourceApplyConfiguration `json:"persistentVolumeClaim,omitempty"`
 }
 
 // EphemeralVolumeSourceApplyConfiguration constructs a declarative configuration of the EphemeralVolumeSource type for use with
@@ -40,7 +40,7 @@ func EphemeralVolumeSource() *EphemeralVolumeSourceApplyConfiguration {
 // WithPersistentVolumeClaim sets the PersistentVolumeClaim field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the PersistentVolumeClaim field is set to the value of the last call.
-func (b *EphemeralVolumeSourceApplyConfiguration) WithPersistentVolumeClaim(value corev1.PersistentVolumeClaimVolumeSource) *EphemeralVolumeSourceApplyConfiguration {
-	b.PersistentVolumeClaim = &value
+func (b *EphemeralVolumeSourceApplyConfiguration) WithPersistentVolumeClaim(value *corev1.PersistentVolumeClaimVolumeSourceApplyConfiguration) *EphemeralVolumeSourceApplyConfiguration {
+	b.PersistentVolumeClaim = value
 	return b
 }

@@ -19,7 +19,7 @@ limitations under the License.
 package v1
 
 import (
-	corev1 "k8s.io/api/core/v1"
+	corev1 "k8s.io/client-go/applyconfigurations/core/v1"
 )
 
 // CloudInitNoCloudSourceApplyConfiguration represents a declarative configuration of the CloudInitNoCloudSource type for use
@@ -29,13 +29,13 @@ import (
 // More info: http://cloudinit.readthedocs.io/en/latest/topics/datasources/nocloud.html
 type CloudInitNoCloudSourceApplyConfiguration struct {
 	// UserDataSecretRef references a k8s secret that contains NoCloud userdata.
-	UserDataSecretRef *corev1.LocalObjectReference `json:"secretRef,omitempty"`
+	UserDataSecretRef *corev1.LocalObjectReferenceApplyConfiguration `json:"secretRef,omitempty"`
 	// UserDataBase64 contains NoCloud cloud-init userdata as a base64 encoded string.
 	UserDataBase64 *string `json:"userDataBase64,omitempty"`
 	// UserData contains NoCloud inline cloud-init userdata.
 	UserData *string `json:"userData,omitempty"`
 	// NetworkDataSecretRef references a k8s secret that contains NoCloud networkdata.
-	NetworkDataSecretRef *corev1.LocalObjectReference `json:"networkDataSecretRef,omitempty"`
+	NetworkDataSecretRef *corev1.LocalObjectReferenceApplyConfiguration `json:"networkDataSecretRef,omitempty"`
 	// NetworkDataBase64 contains NoCloud cloud-init networkdata as a base64 encoded string.
 	NetworkDataBase64 *string `json:"networkDataBase64,omitempty"`
 	// NetworkData contains NoCloud inline cloud-init networkdata.
@@ -51,8 +51,8 @@ func CloudInitNoCloudSource() *CloudInitNoCloudSourceApplyConfiguration {
 // WithUserDataSecretRef sets the UserDataSecretRef field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the UserDataSecretRef field is set to the value of the last call.
-func (b *CloudInitNoCloudSourceApplyConfiguration) WithUserDataSecretRef(value corev1.LocalObjectReference) *CloudInitNoCloudSourceApplyConfiguration {
-	b.UserDataSecretRef = &value
+func (b *CloudInitNoCloudSourceApplyConfiguration) WithUserDataSecretRef(value *corev1.LocalObjectReferenceApplyConfiguration) *CloudInitNoCloudSourceApplyConfiguration {
+	b.UserDataSecretRef = value
 	return b
 }
 
@@ -75,8 +75,8 @@ func (b *CloudInitNoCloudSourceApplyConfiguration) WithUserData(value string) *C
 // WithNetworkDataSecretRef sets the NetworkDataSecretRef field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the NetworkDataSecretRef field is set to the value of the last call.
-func (b *CloudInitNoCloudSourceApplyConfiguration) WithNetworkDataSecretRef(value corev1.LocalObjectReference) *CloudInitNoCloudSourceApplyConfiguration {
-	b.NetworkDataSecretRef = &value
+func (b *CloudInitNoCloudSourceApplyConfiguration) WithNetworkDataSecretRef(value *corev1.LocalObjectReferenceApplyConfiguration) *CloudInitNoCloudSourceApplyConfiguration {
+	b.NetworkDataSecretRef = value
 	return b
 }
 

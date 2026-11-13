@@ -19,7 +19,7 @@ limitations under the License.
 package v1
 
 import (
-	corev1 "k8s.io/api/core/v1"
+	corev1 "k8s.io/client-go/applyconfigurations/core/v1"
 )
 
 // CloudInitConfigDriveSourceApplyConfiguration represents a declarative configuration of the CloudInitConfigDriveSource type for use
@@ -29,13 +29,13 @@ import (
 // More info: https://cloudinit.readthedocs.io/en/latest/topics/datasources/configdrive.html
 type CloudInitConfigDriveSourceApplyConfiguration struct {
 	// UserDataSecretRef references a k8s secret that contains config drive userdata.
-	UserDataSecretRef *corev1.LocalObjectReference `json:"secretRef,omitempty"`
+	UserDataSecretRef *corev1.LocalObjectReferenceApplyConfiguration `json:"secretRef,omitempty"`
 	// UserDataBase64 contains config drive cloud-init userdata as a base64 encoded string.
 	UserDataBase64 *string `json:"userDataBase64,omitempty"`
 	// UserData contains config drive inline cloud-init userdata.
 	UserData *string `json:"userData,omitempty"`
 	// NetworkDataSecretRef references a k8s secret that contains config drive networkdata.
-	NetworkDataSecretRef *corev1.LocalObjectReference `json:"networkDataSecretRef,omitempty"`
+	NetworkDataSecretRef *corev1.LocalObjectReferenceApplyConfiguration `json:"networkDataSecretRef,omitempty"`
 	// NetworkDataBase64 contains config drive cloud-init networkdata as a base64 encoded string.
 	NetworkDataBase64 *string `json:"networkDataBase64,omitempty"`
 	// NetworkData contains config drive inline cloud-init networkdata.
@@ -51,8 +51,8 @@ func CloudInitConfigDriveSource() *CloudInitConfigDriveSourceApplyConfiguration 
 // WithUserDataSecretRef sets the UserDataSecretRef field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the UserDataSecretRef field is set to the value of the last call.
-func (b *CloudInitConfigDriveSourceApplyConfiguration) WithUserDataSecretRef(value corev1.LocalObjectReference) *CloudInitConfigDriveSourceApplyConfiguration {
-	b.UserDataSecretRef = &value
+func (b *CloudInitConfigDriveSourceApplyConfiguration) WithUserDataSecretRef(value *corev1.LocalObjectReferenceApplyConfiguration) *CloudInitConfigDriveSourceApplyConfiguration {
+	b.UserDataSecretRef = value
 	return b
 }
 
@@ -75,8 +75,8 @@ func (b *CloudInitConfigDriveSourceApplyConfiguration) WithUserData(value string
 // WithNetworkDataSecretRef sets the NetworkDataSecretRef field in the declarative configuration to the given value
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the NetworkDataSecretRef field is set to the value of the last call.
-func (b *CloudInitConfigDriveSourceApplyConfiguration) WithNetworkDataSecretRef(value corev1.LocalObjectReference) *CloudInitConfigDriveSourceApplyConfiguration {
-	b.NetworkDataSecretRef = &value
+func (b *CloudInitConfigDriveSourceApplyConfiguration) WithNetworkDataSecretRef(value *corev1.LocalObjectReferenceApplyConfiguration) *CloudInitConfigDriveSourceApplyConfiguration {
+	b.NetworkDataSecretRef = value
 	return b
 }
 

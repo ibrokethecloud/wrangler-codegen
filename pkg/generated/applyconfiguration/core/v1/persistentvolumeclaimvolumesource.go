@@ -19,7 +19,7 @@ limitations under the License.
 package v1
 
 import (
-	corev1 "k8s.io/api/core/v1"
+	corev1 "k8s.io/client-go/applyconfigurations/core/v1"
 )
 
 // PersistentVolumeClaimVolumeSourceApplyConfiguration represents a declarative configuration of the PersistentVolumeClaimVolumeSource type for use
@@ -29,7 +29,7 @@ import (
 // Directly attached to the vmi via qemu.
 // More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
 type PersistentVolumeClaimVolumeSourceApplyConfiguration struct {
-	corev1.PersistentVolumeClaimVolumeSource `json:""`
+	corev1.PersistentVolumeClaimVolumeSourceApplyConfiguration `json:""`
 	// Hotpluggable indicates whether the volume can be hotplugged and hotunplugged.
 	Hotpluggable *bool `json:"hotpluggable,omitempty"`
 }
@@ -44,7 +44,7 @@ func PersistentVolumeClaimVolumeSource() *PersistentVolumeClaimVolumeSourceApply
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the ClaimName field is set to the value of the last call.
 func (b *PersistentVolumeClaimVolumeSourceApplyConfiguration) WithClaimName(value string) *PersistentVolumeClaimVolumeSourceApplyConfiguration {
-	b.PersistentVolumeClaimVolumeSource.ClaimName = &value
+	b.PersistentVolumeClaimVolumeSourceApplyConfiguration.ClaimName = &value
 	return b
 }
 
@@ -52,7 +52,7 @@ func (b *PersistentVolumeClaimVolumeSourceApplyConfiguration) WithClaimName(valu
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the ReadOnly field is set to the value of the last call.
 func (b *PersistentVolumeClaimVolumeSourceApplyConfiguration) WithReadOnly(value bool) *PersistentVolumeClaimVolumeSourceApplyConfiguration {
-	b.PersistentVolumeClaimVolumeSource.ReadOnly = &value
+	b.PersistentVolumeClaimVolumeSourceApplyConfiguration.ReadOnly = &value
 	return b
 }
 

@@ -19,7 +19,7 @@ limitations under the License.
 package v1
 
 import (
-	corev1 "k8s.io/api/core/v1"
+	corev1 "k8s.io/client-go/applyconfigurations/core/v1"
 )
 
 // ConfigMapVolumeSourceApplyConfiguration represents a declarative configuration of the ConfigMapVolumeSource type for use
@@ -28,7 +28,7 @@ import (
 // ConfigMapVolumeSource adapts a ConfigMap into a volume.
 // More info: https://kubernetes.io/docs/concepts/storage/volumes/#configmap
 type ConfigMapVolumeSourceApplyConfiguration struct {
-	corev1.LocalObjectReference `json:""`
+	corev1.LocalObjectReferenceApplyConfiguration `json:""`
 	// Specify whether the ConfigMap or it's keys must be defined
 	Optional *bool `json:"optional,omitempty"`
 	// The volume label of the resulting disk inside the VMI.
@@ -47,7 +47,7 @@ func ConfigMapVolumeSource() *ConfigMapVolumeSourceApplyConfiguration {
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the Name field is set to the value of the last call.
 func (b *ConfigMapVolumeSourceApplyConfiguration) WithName(value string) *ConfigMapVolumeSourceApplyConfiguration {
-	b.LocalObjectReference.Name = &value
+	b.LocalObjectReferenceApplyConfiguration.Name = &value
 	return b
 }
 

@@ -19,7 +19,7 @@ limitations under the License.
 package v1
 
 import (
-	corev1 "k8s.io/api/core/v1"
+	corev1 "k8s.io/client-go/applyconfigurations/core/v1"
 	apicorev1 "kubevirt.io/api/core/v1"
 )
 
@@ -31,7 +31,7 @@ type UtilityVolumeApplyConfiguration struct {
 	Name *string `json:"name,omitempty"`
 	// PersistentVolumeClaimVolumeSource defines the PVC
 	// that is hotplugged to virt-launcher
-	corev1.PersistentVolumeClaimVolumeSource `json:""`
+	corev1.PersistentVolumeClaimVolumeSourceApplyConfiguration `json:""`
 	// Type represents the type of the utility volume.
 	Type *apicorev1.UtilityVolumeType `json:"type,omitempty"`
 }
@@ -54,7 +54,7 @@ func (b *UtilityVolumeApplyConfiguration) WithName(value string) *UtilityVolumeA
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the ClaimName field is set to the value of the last call.
 func (b *UtilityVolumeApplyConfiguration) WithClaimName(value string) *UtilityVolumeApplyConfiguration {
-	b.PersistentVolumeClaimVolumeSource.ClaimName = &value
+	b.PersistentVolumeClaimVolumeSourceApplyConfiguration.ClaimName = &value
 	return b
 }
 
@@ -62,7 +62,7 @@ func (b *UtilityVolumeApplyConfiguration) WithClaimName(value string) *UtilityVo
 // and returns the receiver, so that objects can be built by chaining "With" function invocations.
 // If called multiple times, the ReadOnly field is set to the value of the last call.
 func (b *UtilityVolumeApplyConfiguration) WithReadOnly(value bool) *UtilityVolumeApplyConfiguration {
-	b.PersistentVolumeClaimVolumeSource.ReadOnly = &value
+	b.PersistentVolumeClaimVolumeSourceApplyConfiguration.ReadOnly = &value
 	return b
 }
 

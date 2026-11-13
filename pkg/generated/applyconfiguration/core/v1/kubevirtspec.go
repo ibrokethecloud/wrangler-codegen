@@ -20,6 +20,7 @@ package v1
 
 import (
 	corev1 "k8s.io/api/core/v1"
+	applyconfigurationscorev1 "k8s.io/client-go/applyconfigurations/core/v1"
 	apicorev1 "kubevirt.io/api/core/v1"
 )
 
@@ -39,7 +40,7 @@ type KubeVirtSpecApplyConfiguration struct {
 	ImagePullPolicy *corev1.PullPolicy `json:"imagePullPolicy,omitempty"`
 	// The imagePullSecrets to pull the container images from
 	// Defaults to none
-	ImagePullSecrets []corev1.LocalObjectReference `json:"imagePullSecrets,omitempty"`
+	ImagePullSecrets []applyconfigurationscorev1.LocalObjectReferenceApplyConfiguration `json:"imagePullSecrets,omitempty"`
 	// The namespace Prometheus is deployed in
 	// Defaults to openshift-monitor
 	MonitorNamespace *string `json:"monitorNamespace,omitempty"`
@@ -114,9 +115,12 @@ func (b *KubeVirtSpecApplyConfiguration) WithImagePullPolicy(value corev1.PullPo
 // WithImagePullSecrets adds the given value to the ImagePullSecrets field in the declarative configuration
 // and returns the receiver, so that objects can be build by chaining "With" function invocations.
 // If called multiple times, values provided by each call will be appended to the ImagePullSecrets field.
-func (b *KubeVirtSpecApplyConfiguration) WithImagePullSecrets(values ...corev1.LocalObjectReference) *KubeVirtSpecApplyConfiguration {
+func (b *KubeVirtSpecApplyConfiguration) WithImagePullSecrets(values ...*applyconfigurationscorev1.LocalObjectReferenceApplyConfiguration) *KubeVirtSpecApplyConfiguration {
 	for i := range values {
-		b.ImagePullSecrets = append(b.ImagePullSecrets, values[i])
+		if values[i] == nil {
+			panic("nil value passed to WithImagePullSecrets")
+		}
+		b.ImagePullSecrets = append(b.ImagePullSecrets, *values[i])
 	}
 	return b
 }
